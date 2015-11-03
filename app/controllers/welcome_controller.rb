@@ -3,4 +3,10 @@ class WelcomeController < ApplicationController
     session[:userToken] = params[:token]
     render plain: "ok"
   end
+
+  def index
+    if session[:userToken]
+      redirect_to('/profile')
+    end
+  end
 end
