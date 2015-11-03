@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def login
-    return 'ok'
+    session[:userToken] = params[:token]
+    render plain: "ok"
   end
 end

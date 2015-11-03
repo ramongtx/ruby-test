@@ -1,13 +1,24 @@
-<body class="primarybackground">
+<script type="text/javascript" src="socialConnect.js"></script>
+<script>socialConnectLoad()</script>
+
+<body>
   <div class="jumbotron text-center primarybackground">
     <div class="container">
-      <h1>Seu perfil</h1>
-      <p>Faça o login usando uma das suas redes sociais:</p>
+      <a href="/">
+        <img class="profile-picture" src=<%= @picture %>>
+      </a>
+      <h1>Bem-vindo <%= @name %>!</h1>
       <div class="widget">
-        <div id='login­c6ab6f67' class="socialidcontainer"></div>
+        <div id='connectsocialid' class="socialidcontainer"></div>
       </div>
-      <div>
-      </div>
+      <br>
+      <a type="button" class="btn btn-lg btn-default" id="logoutbutton">
+        <span class="glyphicon glyphicon-log-out"></span> LOGOUT
+      </a>
     </div>
+  </div>
+  <div class="container">
+    <pre><%= @loginData %></pre>
+    <hr>
   </div>
 </body>
