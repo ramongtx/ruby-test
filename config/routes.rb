@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'profile' => 'profile#index'
   post 'login' => 'welcome#login'
   get 'logout' => 'profile#logout'
+  get 'signup' => 'signup#index'
+  post 'signup' => 'signup#sign'
   get '*path' => redirect('/')
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
