@@ -22,6 +22,13 @@ class ProfileController < ApplicationController
     @name = apiresponse["name"]
     @picture = apiresponse["picture_url"]
     @jsonresponse = apiresponse
+
+    if !@name and session[:loginEmail]
+      u = User.find_by(email: session[:loginEmail])
+      @name = u.username if u and u.username
+    end
+
+    @picture = 'avatar.jpg' if !@picture
   end
 
   def logout

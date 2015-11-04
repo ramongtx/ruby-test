@@ -20,6 +20,7 @@ class WelcomeController < ApplicationController
         render plain: signin['error_description']
       else
         session[:loginToken] = signin['login_token']
+        session[:loginEmail] = params[:email]
         render plain: 'ok'
       end
     end
