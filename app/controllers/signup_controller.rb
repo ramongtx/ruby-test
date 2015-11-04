@@ -18,7 +18,12 @@ class SignupController < ApplicationController
     session[:signupResponse] = signupResponse.code
     if signupResponse.code == 201
       user_id = signupResponse.headers['location'].split('/').last
-      render plain: 'ok'
+      user = User.create(username: params[:username], password: params[:password], email: params[:email_address], social_id: user_id)
+      if user.save
+        render plain: 'ok'
+      else
+        render plain: 'Falhou em salvar o usuário'
+      end
     else
       if signupResponse["error_description"]
         render plain: signupResponse["error_description"]

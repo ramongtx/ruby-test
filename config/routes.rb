@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   get 'logout' => 'profile#logout'
   get 'signup' => 'signup#index'
   post 'signup' => 'signup#sign'
+  resources :users, only: %i(index show destroy create update)
+
+
   get '*path' => redirect('/')
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
