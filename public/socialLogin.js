@@ -27,5 +27,9 @@ function socialLoginLoad() {
         }
       });
     });
+    document.getElementById("signupbutton").onclick = function () {
+      socialid.login.logout();
+      window.location = '/signup';
+    };
   };
 }

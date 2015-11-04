@@ -9,6 +9,11 @@ class ProfileController < ApplicationController
       @apiresponse = HTTParty.get(urlstring)
       @name = @apiresponse["name"]
       @picture = @apiresponse["picture_url"]
+
+      if @apiresponse["error"]
+        session[:userToken] = nil
+        redirect_to('/')
+      end
     else
       redirect_to('/')
     end
