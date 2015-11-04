@@ -38,8 +38,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
   def update
     begin
       user = User.find(params[:id])
@@ -53,8 +51,6 @@ class UsersController < ApplicationController
       render json: {"error" => error.message}
     end
   end
-
-
 
   def user_params
     params.permit(:username, :email, :password, :social_id)

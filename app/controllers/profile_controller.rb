@@ -1,43 +1,31 @@
 class ProfileController < ApplicationController
   def index
-    if session[:userToken]
-      loginData = session[:userToken]
-      apiSecret = ENV['API_SECRET']
-      urlstring = 'https://api-staging.socialidnow.com/v1/marketing/login/info'\
-      '?api_secret=' + apiSecret + '&token=' + session[:userToken]
+    if session[:loginToken]
 
+      urlstring = 'https://api-staging.socialidnow.com/v1/marketing/login/info'\
+      '?api_secret=' + ENV['API_SECRET'] + '&token=' + session[:loginToken]
 
       apiresponse = HTTParty.get(urlstring, headers: {'Accept' => '*/*'})
-      @name = apiresponse["name"]
-      @picture = apiresponse["picture_url"]
-      @jsonresponse = apiresponse
-
-      p urlstring
-      p apiresponse.code
-
 
       if apiresponse["error"]
-        session[:userToken] = nil
+        session[:loginToken] = nil
         redirect_to('/')
-      end
-    elsif session[:userId]
-      user = User.find(session[:userId])
-      if user.valid?
-        @name = user.username
-        @jsonresponse = user.as_json
-        @picture = ""
       else
-        session[:userId] = nil
-        redirect_to('/')
+        setProfile(apiresponse)
       end
     else
       redirect_to('/')
     end
   end
 
+  def setProfile(apiresponse)
+    @name = apiresponse["name"]
+    @picture = apiresponse["picture_url"]
+    @jsonresponse = apiresponse
+  end
+
   def logout
-    session[:userToken] = nil
-    session[:userId] = nil
+    session[:loginToken] = nil
     redirect_to('/')
   end
 end

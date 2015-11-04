@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post 'login' => 'welcome#login'
   get 'logout' => 'profile#logout'
   get 'signup' => 'signup#index'
-  post 'signup' => 'signup#sign'
+  post 'signup' => 'signup#signup'
   resources :users, only: %i(index show destroy create update)
 
 
