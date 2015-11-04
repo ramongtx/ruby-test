@@ -7,6 +7,8 @@ class WelcomeController < ApplicationController
   def index
     if session[:userToken]
       redirect_to('/profile')
+    elsif session[:userId]
+      redirect_to('/profile')
     end
   end
 end

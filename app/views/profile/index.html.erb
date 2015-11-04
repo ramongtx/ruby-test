@@ -9,7 +9,7 @@
       </a>
       <h1>Bem-vindo <%= @name %>!</h1>
       <div class="widget">
-        <div id='connectsocialid' class="socialidcontainer"></div>
+        <div id='connectsocialid' class="socialidcontainer" style=<%= @showConnectWidget %>></div>
       </div>
       <br>
       <a type="button" class="btn btn-lg btn-default" id="logoutbutton">
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="container">
-    <pre><%= JSON.pretty_generate(@apiresponse) %></pre>
+    <pre><%= @jsonresponse %></pre>
     <hr>
   </div>
 </body>

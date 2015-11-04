@@ -16,10 +16,12 @@ class SignupController < ApplicationController
                                    basic_auth: { username: '301', password: ENV['API_SECRET'] }
                                   )
     session[:signupResponse] = signupResponse.code
+
     if signupResponse.code == 201
       user_id = signupResponse.headers['location'].split('/').last
       user = User.create(username: params[:username], password: params[:password], email: params[:email_address], social_id: user_id)
       if user.save
+        session[:userId] = user.id
         render plain: 'ok'
       else
         render plain: 'Falhou em salvar o usuário'

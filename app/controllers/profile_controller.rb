@@ -9,9 +9,20 @@ class ProfileController < ApplicationController
       @apiresponse = HTTParty.get(urlstring)
       @name = @apiresponse["name"]
       @picture = @apiresponse["picture_url"]
+      @jsonresponse = @apiresponse
 
       if @apiresponse["error"]
         session[:userToken] = nil
+        redirect_to('/')
+      end
+    elsif session[:userId]
+      user = User.find(session[:userId])
+      if user.valid?
+        @name = user.username
+        @jsonresponse = ""
+        @picture = ""
+      else
+        session[:userId] = nil
         redirect_to('/')
       end
     else
@@ -21,6 +32,7 @@ class ProfileController < ApplicationController
 
   def logout
     session[:userToken] = nil
+    session[:userId] = nil
     redirect_to('/')
   end
 end
