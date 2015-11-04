@@ -6,12 +6,17 @@ class ProfileController < ApplicationController
       urlstring = 'https://api-staging.socialidnow.com/v1/marketing/login/info'\
       '?api_secret=' + apiSecret + '&token=' + session[:userToken]
 
-      @apiresponse = HTTParty.get(urlstring)
-      @name = @apiresponse["name"]
-      @picture = @apiresponse["picture_url"]
-      @jsonresponse = @apiresponse
 
-      if @apiresponse["error"]
+      apiresponse = HTTParty.get(urlstring, headers: {'Accept' => '*/*'})
+      @name = apiresponse["name"]
+      @picture = apiresponse["picture_url"]
+      @jsonresponse = apiresponse
+
+      p urlstring
+      p apiresponse.code
+
+
+      if apiresponse["error"]
         session[:userToken] = nil
         redirect_to('/')
       end
@@ -19,7 +24,7 @@ class ProfileController < ApplicationController
       user = User.find(session[:userId])
       if user.valid?
         @name = user.username
-        @jsonresponse = ""
+        @jsonresponse = user.as_json
         @picture = ""
       else
         session[:userId] = nil

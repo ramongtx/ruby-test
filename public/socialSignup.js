@@ -13,7 +13,25 @@ function socialSignup() {
     cache: false,
     success: function(data) {
       if (data == "ok") {
-        window.location = "/";
+        $.ajax({
+          type: "POST",
+          url: '/login',
+          data: {
+            email: email,
+            password: passphrase
+          },
+          cache: false,
+          success: function(data) {
+            if (data == "ok") {
+              window.location = "/profile";
+            } else {
+              alert(data)
+            }
+          },
+          error: function(e) {
+            alert("ERROR (" + e.status + " - " + e.statusText + "): " + e.responseText);
+          }
+        });
       } else {
         alert(data)
       }

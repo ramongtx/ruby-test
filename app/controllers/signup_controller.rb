@@ -21,7 +21,6 @@ class SignupController < ApplicationController
       user_id = signupResponse.headers['location'].split('/').last
       user = User.create(username: params[:username], password: params[:password], email: params[:email_address], social_id: user_id)
       if user.save
-        session[:userId] = user.id
         render plain: 'ok'
       else
         render plain: 'Falhou em salvar o usuário'

@@ -10,6 +10,29 @@
       <div class="widget row">
         <div class="socialidcontainer" id='login­c6ab6f67'></div>
       </div>
+      <p>Se preferir faça login usando e-mail e senha:</p>
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">@</span>
+            <input aria-describedby="basic-addon1" class="form-control" id="email" onkeyup="if(event.keyCode==13){socialEmailLogin()}" placeholder="E-mail" type="text">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">
+              <i class="fa fa-key"></i>
+            </span>
+            <input aria-describedby="basic-addon1" class="form-control" id="passphrase" onkeyup="if(event.keyCode==13){socialEmailLogin()}" placeholder="Senha" type="password" type="text">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" onclick="socialEmailLogin()">
+                <i class="glyphicon glyphicon-log-in"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-3"></div>
+      </div>
+      <p>Ou ainda, faça seu cadastro:</p>
       <div class="row">
         <a class="btn btn-lg btn-default" id="signupbutton" type="button">
           <span class="fa fa-plus"></span>
