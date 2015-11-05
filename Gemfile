@@ -49,6 +49,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.3.0'
   gem 'simplecov'
   gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'dotenv'
 end
 
 group :development do
