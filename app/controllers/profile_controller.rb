@@ -26,6 +26,7 @@ class ProfileController < ApplicationController
     if !@name and session[:loginEmail]
       u = User.find_by(email: session[:loginEmail])
       @name = u.username if u and u.username
+      @name = session[:loginEmail] if !@name
     end
 
     @picture = 'avatar.jpg' if !@picture

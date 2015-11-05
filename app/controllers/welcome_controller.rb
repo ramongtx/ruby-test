@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
     if params[:token]
       session[:loginToken] = params[:token]
       render plain: 'ok'
-    elsif
+    else
       userData = { password: params[:password],
                    email_address: params[:email] }
 
