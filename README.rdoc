@@ -1,5 +1,5 @@
 == README
 
-Projeto feito de acordo com as especificações fornecidas pela Coffee Bean Technology para o processo seletivo.
+Projeto feito de acordo com as especificações fornecidas pela Coffee Bean Technology.
 
 Demonstração disponível em: https://cbtruby.herokuapp.com
