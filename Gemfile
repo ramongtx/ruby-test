@@ -46,6 +46,9 @@ gem 'httparty'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.3.0'
+  gem 'simplecov'
+  gem 'factory_girl_rails', '~> 4.5.0'
 end
 
 group :development do

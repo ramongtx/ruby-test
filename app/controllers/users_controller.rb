@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     begin
       u = User.create(user_params)
       if u.save
-        render nothing: true
+        render nothing: true, status: :created
       else
         render json: {"error"=>"Failed to save user"}
       end
