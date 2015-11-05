@@ -6,9 +6,8 @@ describe UsersController do
   describe 'GET index' do
     context 'when there are users' do
       before(:all) do
-        @userx = create(:user, username: 'xxx', email: 'x@user.com')
-        create(:user, username: 'yyy', email: 'y@user.com')
-        create(:user, username: 'zzz', email: 'z@user.com')
+        @users = create_list(:valid_user, 3)
+        @userx = @users[rand @users.count]
       end
 
       after(:all) do
@@ -66,9 +65,8 @@ describe UsersController do
   describe 'GET show' do
     context 'when there are users' do
       before(:all) do
-        @userx = create(:user, username: 'xxx', email: 'x@user.com')
-        create(:user, username: 'yyy', email: 'y@user.com')
-        create(:user, username: 'zzz', email: 'z@user.com')
+        @users = create_list(:valid_user, 3)
+        @userx = @users[rand @users.count]
       end
 
       after(:all) do
@@ -121,9 +119,8 @@ describe UsersController do
   describe 'DELETE destroy' do
     context 'when there are users' do
       before(:all) do
-        @userx = create(:user, username: 'xxx', email: 'x@user.com')
-        create(:user, username: 'yyy', email: 'y@user.com')
-        create(:user, username: 'zzz', email: 'z@user.com')
+        @users = create_list(:valid_user, 3)
+        @userx = @users[rand @users.count]
       end
 
       after(:all) do
@@ -167,17 +164,16 @@ describe UsersController do
 
     context 'when there are users' do
       before(:all) do
-        @userx = create(:user, username: 'xxx', email: 'x@user.com')
-        create(:user, username: 'yyy', email: 'y@user.com')
-        create(:user, username: 'zzz', email: 'z@user.com')
+        @users = create_list(:valid_user, 3)
+        @userx = @users[rand @users.count]
       end
 
       after(:all) do
         User.unscoped.delete_all
       end
 
-      it "fails to create" do
-        post :create, username: 'xxx', email: 'x@user.com'
+      it "fails to create if duplicat email" do
+        post :create, username: 'xxx', email: @userx.email
         json = JSON.parse(response.body)
         expect(json.keys.first).to eq('error')
       end
@@ -201,9 +197,9 @@ describe UsersController do
 
     context 'when there are users' do
       before(:all) do
-        @userx = create(:user, username: 'xxx', email: 'x@user.com')
-        create(:user, username: 'yyy', email: 'y@user.com')
-        create(:user, username: 'zzz', email: 'z@user.com')
+        @users = create_list(:valid_user, 3)
+        @userx = @users[0]
+        @usery = @users[1]
       end
 
       after(:all) do
@@ -217,11 +213,11 @@ describe UsersController do
       end
 
       it "fails to update to duplicate email" do
-        put :update, id: @userx.id, username: 'xxx', email: 'y@user.com'
+        put :update, id: @userx.id, username: 'xxx', email: @usery.email
         @userx.reload
         json = JSON.parse(response.body)
         expect(json.keys.first).to eq('error')
-        expect(@userx.email).to eq('x@user.com')
+        expect(@userx.email).not_to eq(@usery.email)
       end
     end
   end
