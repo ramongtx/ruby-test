@@ -26,15 +26,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    begin
-      u = User.create(user_params)
-      if u.save
-        render nothing: true, status: :created
-      else
-        render json: {"error"=>"Failed to save user"}
-      end
-    rescue => error
-      render json: {"error" => error.message}
+    u = User.create(user_params)
+    if u.save
+      render nothing: true, status: :created
+    else
+      render json: {"error"=>"Failed to save user"}
     end
   end
 
