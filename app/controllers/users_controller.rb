@@ -1,3 +1,5 @@
+require 'socialId'
+
 class UsersController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
@@ -45,6 +47,22 @@ class UsersController < ApplicationController
       end
     rescue => error
       render json: {"error" => error.message}
+    end
+  end
+
+  def login
+    if params[:token]
+      session[:loginToken] = params[:token]
+      render nothing: true, status: :ok
+    else
+      response = SocialId.emailLogin(params[:email],params[:password])
+      if response['error']
+        render plain: response['error_description'], status: response.code
+      else
+        session[:loginToken] = response['login_token']
+        session[:loginEmail] = params[:email]
+        render nothing: true, status: :ok
+      end
     end
   end
 

@@ -12,22 +12,18 @@ function socialLoginLoad() {
     socialid.events.onLoginSuccess.addHandler(function(data) {
       $.ajax({
         type: "POST",
-        url: '/login',
+        url: 'users/login',
         data: data,
         cache: false,
         success: function(data) {
-          if (data == "ok") {
-            window.location = "/profile";
-          } else {
-            alert(data)
-          }
+          window.location = "/profile";
         },
         error: function(e) {
           alert("ERROR (" + e.status + " - " + e.statusText + "): " + e.responseText);
         }
       });
     });
-    document.getElementById("signupbutton").onclick = function () {
+    document.getElementById("signupbutton").onclick = function() {
       socialid.login.logout();
       window.location = '/signup';
     };
@@ -40,18 +36,14 @@ function socialEmailLogin() {
 
   $.ajax({
     type: "POST",
-    url: '/login',
+    url: 'users/login',
     data: {
       email: email,
       password: passphrase
     },
     cache: false,
     success: function(data) {
-      if (data == "ok") {
-        window.location = "/profile";
-      } else {
-        alert(data)
-      }
+      window.location = "/profile";
     },
     error: function(e) {
       alert("ERROR (" + e.status + " - " + e.statusText + "): " + e.responseText);

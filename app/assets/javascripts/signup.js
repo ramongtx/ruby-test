@@ -15,7 +15,7 @@ function socialSignup() {
       if (data == "ok") {
         $.ajax({
           type: "POST",
-          url: '/login',
+          url: 'users/login',
           data: {
             email: email,
             password: passphrase

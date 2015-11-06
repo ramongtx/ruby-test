@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   get 'profile' => 'profile#index'
-  post 'login' => 'welcome#login'
   get 'logout' => 'profile#logout'
   get 'signup' => 'signup#index'
   post 'signup' => 'signup#signup'
-  resources :users, only: %i(index show destroy create update)
+  resources :users, only: %i(index show destroy create update) do
+    post 'login', on: :collection
+  end
 
 
   get '*path' => redirect('/')
