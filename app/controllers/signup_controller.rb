@@ -8,7 +8,7 @@ class SignupController < ApplicationController
     urlstring = 'https://api-staging.socialidnow.com/v1/marketing/login/users'
     body = { 'user' => userData }.to_json
     headers = { 'Content-Type' => 'application/json', 'Accept' => '*/*' }
-    auth = { username: '301', password: ENV['API_SECRET'] }
+    auth = { username: '303', password: ENV['API_SECRET'] }
 
     signupResponse = HTTParty.post(urlstring,
                                    body: body,
